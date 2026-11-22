@@ -1,0 +1,7 @@
+version: 1
+app: app/build/outputs/apk/debug/4-app-debug.apk # TODO: the APK your build produces
+# Replace with your suite, e.g. mvn test or npx wdio run wdio.conf.js
+command: node test/appium.mjs
+# Optional: one JUnit XML file to attach to the run
+report: test-results/junit.xml
+timeout: 600

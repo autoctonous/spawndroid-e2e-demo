@@ -1,0 +1,16 @@
+name: spawndroid
+on:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - uses: spawndroid/cli@v0.1.8
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        with:
+          api-key: ${{ secrets.SPAWNDROID_API_KEY }}
+      - name: Pull request from a fork
+        if: github.event.pull_request.head.repo.full_name != github.repository
+        run: echo "::notice::Pull requests from forks get no repository secrets, so SpawnDroid skipped this one. Push the branch to ${{ github.repository }}, or a maintainer can re-run it from a branch there."
